@@ -1,0 +1,13 @@
+services:
+  seismic-mcp:
+    build: .
+    image: seismic-mcp-server:0.1.0
+    container_name: seismic-mcp
+    ports:
+      - "8000:8000"
+    environment:
+      TZ: Asia/Bangkok          # "today" for TMD tools uses this timezone
+      LOG_LEVEL: INFO
+      MCP_STATELESS: "true"     # no session affinity needed
+      MCP_JSON_RESPONSE: "false" # false = SSE stream responses, true = plain JSON
+    restart: unless-stopped
